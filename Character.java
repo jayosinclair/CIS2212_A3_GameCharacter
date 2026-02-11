@@ -248,17 +248,17 @@ public class Character {
 
     //Other Methods:
 
-    /**
-     * 
-     * @param idval
-     * @return
-     */
+    /*
+
+
     @Override
     public String toString(int idval){
 
         return "Character Name: " + name + "\nLevel: " + level + "\nHealth:  " + health + "\nAttack: " + attack + "\nMagic: " + magic + "\Defense: " + defense + "\Luck: " + luck;
     
     }
+
+     */
 
 
     /**

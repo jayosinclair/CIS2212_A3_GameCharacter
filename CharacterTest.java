@@ -18,8 +18,6 @@ game character's member variables and methods.
 //Github repo for this project is at: https://github.com/jayosinclair/CIS2212_A3_GameCharacter.git
 //**********************************************************************************************************************
 
-import java.util.Scanner;
-
 public class CharacterTest{
 
     public static void main(String[] args) {
@@ -49,3 +47,5 @@ Character inst = new Character();
         System.out.println(inst.getLuck());
 
     }
+
+}
