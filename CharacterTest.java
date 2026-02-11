@@ -24,6 +24,28 @@ public class CharacterTest{
 
     public static void main(String[] args) {
 
+Character inst = new Character();
 
+        //To test Character class... these are mutators:
+
+        inst.setID(1);
+        inst.setName("Char Name");
+        inst.setLevel(0);
+        inst.setHealth(80);
+        inst.setAttack(200);
+        inst.setMagic(400);
+        inst.setDefense(45);
+        inst.setLuck(2); 
+
+
+        //To test Character class... these are accessors:
+        System.out.println(inst.getID());
+        System.out.println(inst.getName());
+        System.out.println(inst.getLevel());
+        System.out.println(inst.getHealth());
+        System.out.println(inst.getAttack());
+        System.out.println(inst.getMagic());
+        System.out.println(inst.getDefense());
+        System.out.println(inst.getLuck());
 
     }
