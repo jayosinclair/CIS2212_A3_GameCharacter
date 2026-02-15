@@ -3,10 +3,10 @@
  * 
  */
 
+import java.util.Random;
+
 public class Character {
     
-    //FIXME: Where do I instantiate the random generator? Here? Elsewhere?
-
     //******************************************************MEMBER VARIABLES********************************************************
 
     private int id;
@@ -17,6 +17,8 @@ public class Character {
     private int magic;
     private int defense;
     private int luck;
+
+    Random rgen = new Random();
     
      //*******************************************************MEMBER METHODS********************************************************
 
@@ -208,6 +210,7 @@ public class Character {
      */
     public int getAttack(){
 
+        //Attack number represents strength of the attack
         return attack;
 
     }
@@ -248,23 +251,33 @@ public class Character {
 
     //Other Methods:
 
-    /*
-
 
     @Override
-    public String toString(int idval){
+    public String toString(){
 
-        return "Character Name: " + name + "\nLevel: " + level + "\nHealth:  " + health + "\nAttack: " + attack + "\nMagic: " + magic + "\Defense: " + defense + "\Luck: " + luck;
+        String value =  "\nName: " + name +
+                        "\nLevel: " + level +
+                        "\nHealth: " + health +
+                        "\nAttack: " + attack +
+                        "\nMagic: " + magic +
+                        "\nDefense: " + defense +
+                        "\nLuck: " + luck;
+
+        return value;
     
     }
 
-     */
-
 
     /**
      * 
      */
-    public void attack(){
+    public int attack(){
+
+        int attackStrength = -1;
+
+        attackStrength = this.level * attack;
+
+        return attackStrength;
 
     }
 
@@ -272,7 +285,7 @@ public class Character {
     /**
      * 
      */
-    public void defend(){
+    public void defend(int attackStrength){
 
     }
 

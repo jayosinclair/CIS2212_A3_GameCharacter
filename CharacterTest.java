@@ -45,6 +45,8 @@ Character inst = new Character();
         System.out.println(inst.getMagic());
         System.out.println(inst.getDefense());
         System.out.println(inst.getLuck());
+        System.out.println(inst.toString());
+
 
     }
 
