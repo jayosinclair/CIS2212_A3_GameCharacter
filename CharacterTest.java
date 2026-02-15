@@ -18,35 +18,55 @@ game character's member variables and methods.
 //Github repo for this project is at: https://github.com/jayosinclair/CIS2212_A3_GameCharacter.git
 //**********************************************************************************************************************
 
+import java.util.Random;
+
 public class CharacterTest{
 
     public static void main(String[] args) {
 
-Character inst = new Character();
+Random rgen = new Random();
+
+Character inst1 = new Character();
+
+        int randValue = rgen.nextInt(10);
+
+        System.out.println("Random value: " + randValue);
+
 
         //To test Character class... these are mutators:
 
-        inst.setID(1);
-        inst.setName("Char Name");
-        inst.setLevel(0);
-        inst.setHealth(80);
-        inst.setAttack(200);
-        inst.setMagic(400);
-        inst.setDefense(45);
-        inst.setLuck(2); 
+        inst1.setID(1);
+        inst1.setName("Char Name");
+        inst1.setLevel(0);
+        inst1.setHealth(80);
+        inst1.setAttack(200);
+        inst1.setMagic(400);
+        inst1.setDefense(45);
+        inst1.setLuck(2); 
 
 
         //To test Character class... these are accessors:
-        System.out.println(inst.getID());
-        System.out.println(inst.getName());
-        System.out.println(inst.getLevel());
-        System.out.println(inst.getHealth());
-        System.out.println(inst.getAttack());
-        System.out.println(inst.getMagic());
-        System.out.println(inst.getDefense());
-        System.out.println(inst.getLuck());
-        System.out.println(inst.toString());
+        System.out.println(inst1.getID());
+        System.out.println(inst1.getName());
+        System.out.println(inst1.getLevel());
+        System.out.println(inst1.getHealth());
+        System.out.println(inst1.getAttack());
+        System.out.println(inst1.getMagic());
+        System.out.println(inst1.getDefense());
+        System.out.println(inst1.getLuck());
+        System.out.println(inst1.toString());
 
+        Character inst2 = new Character(9, "Beast", 0,20,7,2,8,1);
+
+        System.out.println(inst2.getID());
+        System.out.println(inst2.getName());
+        System.out.println(inst2.getLevel());
+        System.out.println(inst2.getHealth());
+        System.out.println(inst2.getAttack());
+        System.out.println(inst2.getMagic());
+        System.out.println(inst2.getDefense());
+        System.out.println(inst2.getLuck());
+        System.out.println(inst2.toString());
 
     }
 

@@ -3,7 +3,6 @@
  * 
  */
 
-import java.util.Random;
 
 public class Character {
     
@@ -17,8 +16,6 @@ public class Character {
     private int magic;
     private int defense;
     private int luck;
-
-    Random rgen = new Random();
     
      //*******************************************************MEMBER METHODS********************************************************
 
@@ -41,7 +38,6 @@ public class Character {
 
     }
 
-    //FIXME: Can this be done??
     //Constructor with Parameters:
 
 /**
