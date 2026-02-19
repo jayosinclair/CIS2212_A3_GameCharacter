@@ -26,38 +26,55 @@ public class CharacterTest{
 
         //To test Character class... these are mutators:
 
-        inst1.setName("Char Name");
+        inst1.setName("Charlie");
         inst1.setLevel(0);
-        inst1.setExpPts(0);
-        inst1.setNextLvlExpPts(0);
-        inst1.setHealth(80);
-        inst1.setMagic(400);
-        inst1.setLuck(2); 
+        inst1.setExpPtsCurrent(0);
+        inst1.setNextLvlExpPts(50);
+        inst1.setDefense(15);
+        inst1.setAttackVanilla(20);
+        inst1.setAttackSpecial(35);
+        inst1.setHealthCurrent(100);
+        inst1.setHealthCapacity(100);
+        inst1.setMagicCurrent(15);
+        inst1.setMagicCapacity(15);
+        inst1.setLuck(false); 
 
 
         //To test Character class... these are accessors:
         System.out.println(inst1.getName());
         System.out.println(inst1.getLevel());
-        System.out.println(inst1.getExpPts());
+        System.out.println(inst1.getExpPtsCurrent());
         System.out.println(inst1.getNextLvlExpPts());
-        System.out.println(inst1.getHealth());
-        System.out.println(inst1.getMagic());
+        System.out.println(inst1.getDefense());
+        System.out.println(inst1.getAttackVanilla());
+        System.out.println(inst1.getAttackSpecial());
+        System.out.println(inst1.getHealthCurrent());
+        System.out.println(inst1.getHealthCapacity());
+        System.out.println(inst1.getMagicCurrent());
+        System.out.println(inst1.getMagicCapacity());
         System.out.println(inst1.getLuck());
         System.out.println(inst1.toString());
 
-        Character inst2 = new Character("Beast", 0,0, 10, 20,7,1);
+        Character inst2 = new Character("Rocky", 0,0, 50,20,22,35,95,95,10,10,false);
 
         System.out.println(inst2.getName());
         System.out.println(inst2.getLevel());
-        System.out.println(inst2.getHealth());
-        System.out.println(inst2.getMagic());
+        System.out.println(inst2.getExpPtsCurrent());
+        System.out.println(inst2.getNextLvlExpPts());
+        System.out.println(inst2.getDefense());
+        System.out.println(inst2.getAttackVanilla());
+        System.out.println(inst2.getAttackSpecial());
+        System.out.println(inst2.getHealthCurrent());
+        System.out.println(inst2.getHealthCapacity());
+        System.out.println(inst2.getMagicCurrent());
+        System.out.println(inst2.getMagicCapacity());
         System.out.println(inst2.getLuck());
         System.out.println(inst2.toString());
 
 
 
-        
-        //Character 1 attacks Character 2
+
+        /*Character 1 attacks Character 2
         System.out.println("Character 1 attacks Character 2...: \n\n");
 
         int attack1 = inst1.attack();
@@ -69,6 +86,7 @@ public class CharacterTest{
 
         System.out.println("Character 2:");
         System.out.println(inst2.toString());
+        */
 
 
     }
