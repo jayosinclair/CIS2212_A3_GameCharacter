@@ -2,7 +2,7 @@
 Section: CIS 2212-801
 Assignment: Project 3 Game Character
 Due Date: February 25, 2026
-Submitted: February XX, 2026
+Submitted: February 21, 2026
 */
 
 
@@ -75,7 +75,7 @@ public class Character {
 
     public Character(String nameVal, int levelVal, int expPtsCurrentVal, int nextLvlExpPtsVal, int defenseVal, int attackVanillaVal, int attackSpecialVal, int healthCurrentVal, int healthCapacityVal, int magicCurrentVal, int magicCapacityVal, boolean luckVal){
 
-        name = nameVal;
+        name = nameVal; //By assigning all these values without using setter methods, I'm assuming that the arguments passed in are valid/make sense in the first place (e.g., there is not a negative healthCurrent value). I did not use setter methods because the book doesn't when discussed at Figure 4.6.2.
         level = levelVal;
         expPtsCurrent = expPtsCurrentVal;
         nextLvlExpPts = nextLvlExpPtsVal;
@@ -101,7 +101,9 @@ public class Character {
 
     public void setName(String nameVal){
 
-        this.name = nameVal;
+        name = nameVal;
+
+        //I had originally written this as this.name = nameVal, but I changed it to match what the book shows to do with making setters. I'm not sure if it really matters here anyway since there isn't room for ambiguity
 
     }
 
@@ -115,7 +117,7 @@ public class Character {
     */
     public void setLevel(int levelVal){
 
-        this.level = levelVal;
+        level = levelVal;
 
     }
 
@@ -130,7 +132,7 @@ public class Character {
 
     public void setExpPtsCurrent(int expPtsCurrentVal){
 
-        this.expPtsCurrent = expPtsCurrentVal;
+        expPtsCurrent = expPtsCurrentVal;
 
     }
 
@@ -145,7 +147,7 @@ public class Character {
 
     public void setNextLvlExpPts(int nextLvlExpPtsVal){
 
-        this.nextLvlExpPts = nextLvlExpPtsVal;
+        nextLvlExpPts = nextLvlExpPtsVal;
 
     }
 
@@ -159,7 +161,7 @@ public class Character {
 
     public void setDefense (int defenseVal){
 
-        this.defense = defenseVal;
+        defense = defenseVal;
 
     }
 
@@ -173,7 +175,7 @@ public class Character {
 
     public void setAttackVanilla (int attackVanillaVal){
 
-        this.attackVanilla = attackVanillaVal;
+        attackVanilla = attackVanillaVal;
 
     }
 
@@ -187,7 +189,7 @@ public class Character {
 
     public void setAttackSpecial (int attackSpecialVal){
 
-        this.attackSpecial = attackSpecialVal;
+        attackSpecial = attackSpecialVal;
 
     }
 
@@ -206,7 +208,7 @@ public class Character {
             healthCurrentVal = 0; //No need to go into negative health
         }
         
-        this.healthCurrent = healthCurrentVal;
+        healthCurrent = healthCurrentVal;
 
     }
 
@@ -221,7 +223,7 @@ public class Character {
 
     public void setHealthCapacity(int healthCapacityVal){
 
-        this.healthCapacity = healthCapacityVal;
+        healthCapacity = healthCapacityVal;
 
     }
 
@@ -236,7 +238,7 @@ public class Character {
 
     public void setMagicCurrent(int magicCurrentVal){
 
-        this.magicCurrent = magicCurrentVal;
+        magicCurrent = magicCurrentVal;
 
     }
 
@@ -251,7 +253,7 @@ public class Character {
 
     public void setMagicCapacity(int magicCapacityVal){
 
-        this.magicCapacity = magicCapacityVal;
+        magicCapacity = magicCapacityVal;
 
     }
 
@@ -264,7 +266,7 @@ public class Character {
      */
     public void setLuck(boolean luckVal){
 
-        this.luck = luckVal;
+        luck = luckVal;
 
     }
 
@@ -471,14 +473,32 @@ public class Character {
      */
     public int attack(){
 
-        int attackStrength = this.getAttackVanilla();
+        int attackStrength = attackVanilla;
+
+        this.luck = rgen.nextBoolean(); //Use a random number generator to get a boolean value that is assigned to luck, which is used to intensify the attack if true.
 
     
-    
-        if (luck){
+        if (this.luck){
 
-            attackStrength += 30;
+            int randomNum = -1; //Random int with a switch statement just for fun and to further randomize.
 
+            randomNum = rgen.nextInt(3); 
+            
+            switch (randomNum) { 
+
+                case 0: attackStrength += 11;
+                        break;
+                    
+                case 1: attackStrength += 53;
+                        break;
+
+                case 2: attackStrength += 99999;
+                        break;
+
+                default: attackStrength = 0; //If a 0 attack is encountered, it's a clue that there was an unhandled error with the switch/random int construct.
+
+            }
+            
         }
 
         else{
@@ -487,6 +507,8 @@ public class Character {
 
 
         }
+
+        this.luck = false; //Reset luck
 
         return attackStrength;
 
@@ -502,7 +524,9 @@ public class Character {
 
     public int attackSpecial(){
 
-        int attackStrength = this.getAttackSpecial();
+        int attackStrength = attackSpecial;
+
+        this.luck = rgen.nextBoolean(); //Use a random number generator to get a boolean value that is assigned to luck, which is used to intensify the attack if true.
     
         if (this.luck){
 
@@ -519,6 +543,8 @@ public class Character {
 
         setMagicCurrent(0); //Update the current magic meter to deplete all the way to 0. Character would need to gain more magic to use a special move again
 
+        this.luck = false; //Reset luck
+
         return attackStrength;
 
     }
@@ -532,15 +558,42 @@ public class Character {
      */
     public void defend(int attackStrength){
 
-        //FIXME: The defend method should use a calculation using instance variables and a random number to degrade health and/or other attributes
+        int defenseVal = defense;
+        int healthVal = healthCurrent;
+        int healthPotential = healthCapacity;
 
-        int defenseVal = this.getDefense();
-        int healthVal = this.getHealthCurrent();
-        int healthPotential = this.getHealthCapacity();
+
+        this.luck = rgen.nextBoolean(); //Use a random number generator to get a boolean value that is assigned to luck, which is used to heighten defense if true.
 
         if (this.luck){
 
-            defenseVal += 30;
+            int randomNum = rgen.nextInt(3); 
+            
+            switch (randomNum) { 
+
+                case 0: defenseVal += 2;
+                        break;
+                    
+                case 1: defenseVal += 33;
+                        break;
+
+                case 2: defenseVal += 78561;
+                        break;
+
+                default: defenseVal = 0; //If a 0 defenseVal is encountered, it's a clue that there was an unhandled error with the switch/random int construct.
+
+            }
+            
+        }
+
+        this.luck = false; //Reset luck
+
+
+        //Make sure defense doesn't add to health if it outflanks the attack
+
+        if (attackStrength < defenseVal){
+
+            defenseVal = attackStrength;
 
         }
 
@@ -555,7 +608,7 @@ public class Character {
 
         }
 
-        this.setHealthCurrent(healthVal);
+        this.setHealthCurrent(healthVal); //I used the setter method for setHealthCurrent rather than just assigning healthVal directly to healthCurrent since setHealthCurrent controls for setting a health value < 0
 
     }
 
@@ -569,7 +622,7 @@ public class Character {
 
     public void levelUp(){
 
-        level += 1;
+        level += 1; //Assuming there's no such thing as a max level for now... This implementation can be updated one day. I kept it simple here and did not use setters with validations within those methods.
         nextLvlExpPts += 200;
         defense += 45;
         attackVanilla += 22;

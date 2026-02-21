@@ -2,7 +2,7 @@
 Section: CIS 2212-801
 Assignment: Project 3 Game Character
 Due Date: February 25, 2026
-Submitted: February XX, 2026
+Submitted: February 21, 2026
 */
 
 /**
@@ -12,7 +12,10 @@ Program Function: This program designs a class for an RPG game character. The cl
 with a couple other methods used to manipulate character attributes and have characters take actions.
 
 Note: CharacterTest is the wrapper class containing the main method, while the Character class has the blueprint for the 
-game character's member variables and methods.
+game character's member variables and methods. The CharacterTest is not an actual game, but rather it has many stub tests
+for the Character class. Getters and setters are tested with individual println statements. Two different constructors (one with and one without
+arguments) are tested. Individual println statements are used extensively to show contents of instance variables. Snippets of functionality are tested
+first with some hard-coded attacks and later with a while loop that runes until two of the three characters instantiated die/fall.
 
 */
 
@@ -91,8 +94,6 @@ public class CharacterTest{
 
         obj2.defend(attackValue);
 
-        obj2.setLuck(false); //Reset luck
-
         System.out.println(obj2.getName() + "\'s Updated Stats: ");
         System.out.println(obj2.toString());
 
@@ -101,16 +102,13 @@ public class CharacterTest{
 
         //Character 2 attacks Character 1
         System.out.println("\n________________________________________________________________________");
-        System.out.println("\n\nCharacter 2 (" + obj2.getName() + ") Attacks Character 1 (" + obj1.getName() + ") Using Special Attack with " + obj1.getName() + " getting luck: \n\n");
+        System.out.println("\n\nCharacter 2 (" + obj2.getName() + ") Attacks Character 1 (" + obj1.getName() + ") Using Special Attack: \n\n");
 
         attackValue = obj2.attackSpecial();
-
-        obj1.setLuck(true);
 
         System.out.println(obj2.getName() + "\'s Attack Value Inflicted on " + obj1.getName() + ": " + attackValue);
 
         obj1.defend(attackValue);
-        obj1.setLuck(false); //Reset luck
         System.out.println(obj1.getName() + "\'s Updated Stats: ");
         System.out.println(obj1.toString());
 
@@ -119,11 +117,9 @@ public class CharacterTest{
         System.out.println(obj2.toString());
 
         attackValue = -1; //Reset attackValue in main method for testing
-        obj1.setLuck(false); //Reset luck
-
 
         System.out.println("\n________________________________________________________________________");
-        System.out.println("\n" + obj3.getName() + " Enters As a New Challenger to test exp pts and level up (with magic cap increase). " + obj3.getName() + "Stats: ");
+        System.out.println("\n" + obj3.getName() + " Enters As a New Challenger to test exp pts and level up (with magic cap increase). " + obj3.getName() + " Stats: ");
         System.out.println(obj3.toString());
 
 
@@ -137,6 +133,7 @@ public class CharacterTest{
         System.out.println(obj3.getName() + "\'s Attack Value Inflicted on " + obj1.getName() + ": " + attackValue);
 
         obj1.defend(attackValue);
+        attackValue = -1; //Reset attackValue in main method for testing
         System.out.println(obj1.getName() + "\'s Updated Stats: ");
         System.out.println(obj1.toString());
 
@@ -151,7 +148,44 @@ public class CharacterTest{
 
         }
 
-        obj3.setLuck(false); //Reset luck
+
+        //Grande (obj1) is undoubtedly dead at this point. Have Charlie (obj3) and Rocky (obj2) fight it out until someone loses. If Rocky is already dead, don't execute the while loop at all.
+
+        System.out.println("\n________________________________________________________________________");
+        System.out.println("More Moves (If More Than 2 Characters Still Alive):");
+
+        while (obj2.getHealthCurrent() > 0 && obj3.getHealthCurrent() > 0){
+
+            attackValue = obj2.attack();
+            System.out.println(obj2.getName() + " Attacked " + obj3.getName() + " with Value of " + attackValue);
+            obj3.defend(attackValue);
+            System.out.println(obj3.getName() + " Defended. Health Updated to " + obj3.getHealthCurrent() + "\n\n");
+            attackValue = -1; //Reset attackValue in main method for testing
+
+
+            if (obj3.getHealthCurrent() > 0){ //Obj3 can only fight back if not dead
+
+                attackValue = obj3.attack();
+                System.out.println(obj3.getName() + " Attacked " + obj2.getName() + " with Value of " + attackValue);
+                obj2.defend(attackValue);
+                System.out.println(obj2.getName() + " Health Updated to " + obj2.getHealthCurrent() + "\n\n");
+                attackValue = -1;
+
+            }
+
+            if (obj2.getHealthCurrent() <= 0){
+
+                System.out.println(obj2.getName() + " Died.");
+
+            }
+
+            if (obj3.getHealthCurrent() <= 0){
+
+                System.out.println(obj3.getName() + " Died.");
+
+            }
+
+        }
 
         //Print Values for all Characters:
 
@@ -162,8 +196,6 @@ public class CharacterTest{
         System.out.println("\n" + obj3.toString());
 
     }
-
-
 
 
 }
