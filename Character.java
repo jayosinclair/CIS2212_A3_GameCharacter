@@ -1,3 +1,11 @@
+/*Author: Jay Olson
+Section: CIS 2212-801
+Assignment: Project 3 Game Character
+Due Date: February 25, 2026
+Submitted: February XX, 2026
+*/
+
+
 import java.util.Random;
 
 /**
@@ -20,8 +28,8 @@ public class Character {
     private int healthCapacity; //Amount of possible health at the current level
     private int magicCurrent; //Amount of magic character currently has
     private int magicCapacity; //Amount of possible magic at the current level
-    private boolean luck; //Flag for whether player has "luck" that can be used on next turn to reduce damage. This is a power-up
-    Random rgen = new Random();
+    private boolean luck; //Flag for whether player has "luck" that can be used on next turn to reduce damage OR increase damage, depending on whether move is offensive or defensive. This is a power-up
+    Random rgen = new Random(); //Make a random object
     
     //*******************************************************MEMBER METHODS********************************************************
 
@@ -459,19 +467,51 @@ public class Character {
      */
     public int attack(){
 
-        //FIXME: Need to fill in content for this method
+        int attackStrength = this.getAttackVanilla();
+    
+        if (luck){
 
-        int attackStrength = 0;
+            attackStrength += 30;
+
+        }
+
+        else{
+
+        attackStrength = attackStrength += 5;
+
+
+        }
 
         return attackStrength;
 
     }
 
+
+    /**
+     * 
+     * The attackSpecial method calculates and returns a value for an offensive move against an opponent when magic is used for a "special" attack. The attackSpecial method
+     * applies a random number against current baseline attribute levels in the calculation, including the adjustment for the special move
+     * 
+     */
+
     public int attackSpecial(){
 
-        //FIXME: Need to fill in content for this method. Be sure it updates the magic meter.
+        int attackStrength = this.getAttackSpecial();
+    
+        if (luck){
 
-        int attackStrength = 0;
+            attackStrength += 50;
+
+        }
+
+        else{
+
+        attackStrength = attackStrength += 35;
+
+
+        }
+
+        setMagicCurrent(0); //Update the current magic meter to deplete all the way to 0. Character would need to gain more magic to use a special move again
 
         return attackStrength;
 
@@ -488,8 +528,29 @@ public class Character {
 
         //FIXME: The defend method should use a calculation using instance variables and a random number to degrade health and/or other attributes
 
+        int defenseVal = this.getDefense();
+        int healthVal = this.getHealthCurrent();
+        int healthPotential = this.getHealthCapacity();
+
+        if (this.luck){
+
+            defenseVal += 50;
+
+        }
+
+
+        //Update health
+
+        healthVal = healthVal - attackStrength + defenseVal;
+
+        if (healthVal > healthPotential){ //Make sure defense doesn't raise health more than health can possibly be
+
+            healthVal = healthPotential;
+
+        }
+
+        this.setHealthCurrent(healthVal);
 
     }
-
 
 }
