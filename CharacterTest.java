@@ -25,12 +25,13 @@ public class CharacterTest{
 
         Character obj1 = new Character();
         Character obj2 = new Character("Rocky", 0,0, 50,20,22,35,95,95,10,10,false);
+        Character obj3 = new Character("Charlie", 49,7992, 8000,9999,7777,9997,9995,9995,700,700,true);
 
         System.out.println("\n\nBegin test stubs......\n");
 
         //To test Character class... these are mutators to replace default constructor values:
 
-        obj1.setName("Charlie");
+        obj1.setName("Grande");
         obj1.setLevel(0);
         obj1.setExpPtsCurrent(0);
         obj1.setNextLvlExpPts(50);
@@ -82,7 +83,7 @@ public class CharacterTest{
 
         //Character 1 attacks Character 2
         System.out.println("\n________________________________________________________________________");
-        System.out.println("\n\nCharacter 1 (" + obj1.getName() + ") Attacks Character 2 (" + obj2.getName() + ")...: \n\n");
+        System.out.println("\n\nCharacter 1 (" + obj1.getName() + ") Attacks Character 2 (" + obj2.getName() + "): \n\n");
 
         int attackValue = obj1.attack();
 
@@ -90,10 +91,79 @@ public class CharacterTest{
 
         obj2.defend(attackValue);
 
+        obj2.setLuck(false); //Reset luck
+
         System.out.println(obj2.getName() + "\'s Updated Stats: ");
         System.out.println(obj2.toString());
 
+        attackValue = -1; //Reset attackValue in main method for testing
+
+
+        //Character 2 attacks Character 1
+        System.out.println("\n________________________________________________________________________");
+        System.out.println("\n\nCharacter 2 (" + obj2.getName() + ") Attacks Character 1 (" + obj1.getName() + ") Using Special Attack with " + obj1.getName() + " getting luck: \n\n");
+
+        attackValue = obj2.attackSpecial();
+
+        obj1.setLuck(true);
+
+        System.out.println(obj2.getName() + "\'s Attack Value Inflicted on " + obj1.getName() + ": " + attackValue);
+
+        obj1.defend(attackValue);
+        obj1.setLuck(false); //Reset luck
+        System.out.println(obj1.getName() + "\'s Updated Stats: ");
+        System.out.println(obj1.toString());
+
+
+        System.out.println("\n" + obj2.getName() + "\'s Updated Stats (Magic was Depleted): ");
+        System.out.println(obj2.toString());
+
+        attackValue = -1; //Reset attackValue in main method for testing
+        obj1.setLuck(false); //Reset luck
+
+
+        System.out.println("\n________________________________________________________________________");
+        System.out.println("\n" + obj3.getName() + " Enters As a New Challenger to test exp pts and level up (with magic cap increase). " + obj3.getName() + "Stats: ");
+        System.out.println(obj3.toString());
+
+
+
+        //Character 3 attacks Character 1
+        System.out.println("\n________________________________________________________________________");
+        System.out.println("\n\nCharacter 3 (" + obj3.getName() + ") Attacks Character 1 (" + obj1.getName() + "): \n\n");
+
+        attackValue = obj3.attack();
+
+        System.out.println(obj3.getName() + "\'s Attack Value Inflicted on " + obj1.getName() + ": " + attackValue);
+
+        obj1.defend(attackValue);
+        System.out.println(obj1.getName() + "\'s Updated Stats: ");
+        System.out.println(obj1.toString());
+
+        if (obj1.getHealthCurrent() <= 0){
+            System.out.println("\n\n" + obj1.getName() + " has fallen."); //Obj1 character dies
+            obj3.setExpPtsCurrent(obj3.getExpPtsCurrent() + 10); //Obj2 (attacker in this case) gets experience points from Obj1's death
+
+            if (obj3.getExpPtsCurrent() > obj3.getNextLvlExpPts()){
+                System.out.println(obj3.getName() + " Level Up!");
+                obj3.levelUp();
+            }
+
+        }
+
+        obj3.setLuck(false); //Reset luck
+
+        //Print Values for all Characters:
+
+        System.out.println("\n________________________________________________________________________");
+        System.out.println("Current Values for All Characters: ");
+        System.out.println(obj1.toString());
+        System.out.println("\n" + obj2.toString());
+        System.out.println("\n" + obj3.toString());
 
     }
+
+
+
 
 }

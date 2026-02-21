@@ -202,6 +202,10 @@ public class Character {
 
     public void setHealthCurrent(int healthCurrentVal){
 
+        if (healthCurrentVal < 0){
+            healthCurrentVal = 0; //No need to go into negative health
+        }
+        
         this.healthCurrent = healthCurrentVal;
 
     }
@@ -468,6 +472,8 @@ public class Character {
     public int attack(){
 
         int attackStrength = this.getAttackVanilla();
+
+    
     
         if (luck){
 
@@ -498,15 +504,15 @@ public class Character {
 
         int attackStrength = this.getAttackSpecial();
     
-        if (luck){
+        if (this.luck){
 
-            attackStrength += 50;
+            attackStrength += 70;
 
         }
 
         else{
 
-        attackStrength = attackStrength += 35;
+        attackStrength = attackStrength += 40;
 
 
         }
@@ -534,7 +540,7 @@ public class Character {
 
         if (this.luck){
 
-            defenseVal += 50;
+            defenseVal += 30;
 
         }
 
@@ -552,5 +558,28 @@ public class Character {
         this.setHealthCurrent(healthVal);
 
     }
+
+    /**
+     * 
+     * The levelUp method increases values for various attributes within the class.
+     * The values right now are arbitrary and static, but this could later be extended read in from a file.
+     * 
+     */
+
+
+    public void levelUp(){
+
+        level += 1;
+        nextLvlExpPts += 200;
+        defense += 45;
+        attackVanilla += 22;
+        attackSpecial += 47;
+        healthCapacity += 50;
+        healthCurrent = healthCapacity;
+        magicCapacity += 23;
+        magicCurrent = magicCapacity;
+
+    }
+
 
 }
